@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "test-jupyter-ai-tools"
+version = "0.0.1"
+authors = [
+  { name="Abigayle Mercer", email="abigaylemercer@gmail.com" },
+]
+description = "Tools for manipulating Jupyter notebooks and evaluating AI tool usage."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Repository = "https://github.com/Abigayle-Mercer/test-jupyter-ai-tools"
+
