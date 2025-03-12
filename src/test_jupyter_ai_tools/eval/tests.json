@@ -15,7 +15,7 @@
                 ],
     "write_to_cell": [
         {"command": "make the second cell empty", "expected_tools": ["write_to_cell"]},
-        {"command": "print the time of day out in the 1st cell", "expected_tools": ["write_to_cell"]},
+        {"command": "print the time of day out in the 2nd cell", "expected_tools": ["write_to_cell"]},
         {"command": "make the third cell run a for loop that prints the first 5 powers of two", "expected_tools": ["write_to_cell"]},
         {"command": "have the second cell print 'hi'", "expected_tools": ["write_to_cell"]}
     ],
