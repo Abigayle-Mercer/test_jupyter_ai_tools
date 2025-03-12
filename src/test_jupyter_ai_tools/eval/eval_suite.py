@@ -3,9 +3,9 @@ import shutil
 from collections import defaultdict
 from pathlib import Path
 
-ORIGINAL_NOTEBOOK = "test_notebook.ipynb"
-BACKUP_NOTEBOOK = "test_notebook_backup.ipynb"
-TEST_CASES_PATH = "tests.json"
+ORIGINAL_NOTEBOOK = "tests/test_notebook.ipynb"
+BACKUP_NOTEBOOK = "tests/test_notebook_backup.ipynb"
+TEST_CASES_PATH = "tests/tests.json"
 
 
 def run_eval_suite(agent, test_cases_path: str = TEST_CASES_PATH):
