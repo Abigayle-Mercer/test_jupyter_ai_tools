@@ -1,7 +1,7 @@
 import json
 
 
-def delete_cell(file_path: str, cell_id: int) -> str:
+def delete_cell(file_path: str, cell_index: int) -> str:
     """
     Remove a cell at a given integer cell index.
     """
@@ -9,21 +9,22 @@ def delete_cell(file_path: str, cell_id: int) -> str:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
 
-        if 0 <= cell_id < len(notebook["cells"]):
-            cut_cell = notebook["cells"].pop(cell_id)
+        if 0 <= cell_index < len(notebook["cells"]):
+            cut_cell = notebook["cells"].pop(cell_index)
 
+            json_str = json.dumps(notebook, indent=2)
             with open(file_path, "w", encoding="utf-8") as f:
-                json.dump(notebook, f, indent=2)
+                f.write(json_str)
 
-            return f"✅ Cut cell {cell_id}: {cut_cell['source']}"
+            return f"✅ Cut cell {cell_index}: {cut_cell['source']}"
         else:
-            return f"❌ Invalid cell ID: {cell_id}"
+            return f"❌ Invalid cell ID: {cell_index}"
 
     except Exception as e:
         return f"❌ Error cutting cell: {str(e)}"
 
 
-def add_cell(file_path: str, cell_id: int, cell_type: str = "code") -> str:
+def add_cell(file_path: str, cell_index: int, cell_type: str = "code") -> str:
     """
     Add an empty cell at a given integer cell index. The cell is a code cell by default,
     but can be set to markdown with the string "markdown".
@@ -39,11 +40,12 @@ def add_cell(file_path: str, cell_id: int, cell_type: str = "code") -> str:
             "outputs": [] if cell_type == "code" else None
         }
 
-        id = max(0, min(cell_id, len(notebook["cells"])))
+        id = max(0, min(cell_index, len(notebook["cells"])))
         notebook["cells"].insert(id, new_cell)
 
+        json_str = json.dumps(notebook, indent=2)
         with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(notebook, f, indent=2)
+            f.write(json_str)
 
         return f"✅ Added {cell_type} cell at position {id}."
 
@@ -51,7 +53,7 @@ def add_cell(file_path: str, cell_id: int, cell_type: str = "code") -> str:
         return f"❌ Error adding cell: {str(e)}"
 
 
-def write_to_cell(file_path: str, cell_id: int, content: str) -> str:
+def write_to_cell(file_path: str, cell_index: int, content: str) -> str:
     """
     Overwrite the content of an existing cell at a given cell index.
     """
@@ -59,21 +61,22 @@ def write_to_cell(file_path: str, cell_id: int, content: str) -> str:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
 
-        if 0 <= cell_id < len(notebook["cells"]):
-            notebook["cells"][cell_id]["source"] = content.split("\n")
+        if 0 <= cell_index < len(notebook["cells"]):
+            notebook["cells"][cell_index]["source"] = content.split("\n")
 
+            json_str = json.dumps(notebook, indent=2)
             with open(file_path, "w", encoding="utf-8") as f:
-                json.dump(notebook, f, indent=2)
+                f.write(json_str)
 
-            return f"✅ Updated cell {cell_id} with content:\n{content}"
+            return f"✅ Updated cell {cell_index} with content:\n{content}"
         else:
-            return f"❌ Invalid cell ID: {cell_id}"
+            return f"❌ Invalid cell ID: {cell_index}"
 
     except Exception as e:
         return f"❌ Error writing to cell: {str(e)}"
 
 
-def read_cell(file_path: str, cell_id: int) -> str:
+def read_cell(file_path: str, cell_index: int) -> str:
     """
     Read the full content of a cell at a given integer cell index.
     """
@@ -81,11 +84,11 @@ def read_cell(file_path: str, cell_id: int) -> str:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
 
-        if 0 <= cell_id < len(notebook["cells"]):
-            cell_data = notebook["cells"][cell_id]
+        if 0 <= cell_index < len(notebook["cells"]):
+            cell_data = notebook["cells"][cell_index]
             return json.dumps(cell_data, indent=2)
         else:
-            return f"❌ Invalid cell ID: {cell_id}"
+            return f"❌ Invalid cell ID: {cell_index}"
 
     except Exception as e:
         return f"❌ Error reading cell: {str(e)}"

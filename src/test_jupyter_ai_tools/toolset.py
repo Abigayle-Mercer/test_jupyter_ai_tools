@@ -12,21 +12,21 @@ from .tools import (
 
 class DeleteCellInput(BaseModel):
     file_path: str = Field(description="Path to the Jupyter notebook")
-    cell_id: int = Field(description="The integer index of the cell to delete")
+    cell_index: int = Field(description="The integer index of the cell to delete")
 
 class AddCellInput(BaseModel):
     file_path: str = Field(description="Path to the Jupyter notebook")
-    cell_id: int = Field(description="The position to insert the new cell")
+    cell_index: int = Field(description="The integer index of the position to insert the new cell")
     cell_type: str = Field(default="code", description="Type of cell: 'code' or 'markdown'")
 
 class WriteToCellInput(BaseModel):
     file_path: str = Field(description="Path to the Jupyter notebook")
-    cell_id: int = Field(description="The cell index to overwrite")
+    cell_index: int = Field(description="The integer index of the cell to overwrite")
     content: str = Field(description="The content to write into the cell")
 
 class ReadCellInput(BaseModel):
     file_path: str = Field(description="Path to the Jupyter notebook")
-    cell_id: int = Field(description="The cell index to read")
+    cell_index: int = Field(description="The integer index of the cell to read")
 
 class CellCountInput(BaseModel):
     file_path: str = Field(description="Path to the Jupyter notebook")
@@ -53,14 +53,14 @@ structured_tools = [
     StructuredTool.from_function(
         func=write_to_cell,
         name="write_to_cell",
-        description="Overwrite the content of a cell in a Jupyter notebook",
+        description="Overwrite the content of a cell at a particular index in a Jupyter notebook",
         args_schema=WriteToCellInput,
         return_direct=True,
     ),
     StructuredTool.from_function(
         func=read_cell,
         name="read_cell",
-        description="Read the full content and metadata of a specific cell",
+        description="Read the full content of a cell at a given integer cell index. This includes its type, execution count, metadata, source content, and output if the cell is a code cell.",
         args_schema=ReadCellInput,
         return_direct=True,
     ),
@@ -74,7 +74,7 @@ structured_tools = [
     StructuredTool.from_function(
         func=read_notebook,
         name="read_notebook",
-        description="Return a formatted string showing all cells and their content",
+        description="Retrieve all cells from a notebook in a string format. This includes all of the cells and their order in the notebook, their content, output, cell type, execution count, and other metadata.",
         args_schema=ReadNotebookInput,
         return_direct=True,
     )
