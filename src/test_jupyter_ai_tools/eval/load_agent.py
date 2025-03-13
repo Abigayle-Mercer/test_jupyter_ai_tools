@@ -21,7 +21,7 @@ def make_default_agent(openai_key: str, model: str = "gpt-4-turbo"):
     def notebook_editor_node(state):
         messages = state["messages"]
         file_path = state["file_path"]
-        print("DEBUG: ", messages)
+        print("DEBUG: ", messages[-1])
         result = model_bound.invoke(messages)
         messages = messages + [result]
         return {"messages": messages, "file_path": file_path}
