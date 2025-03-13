@@ -67,7 +67,7 @@ structured_tools = [
     StructuredTool.from_function(
         func=cell_count,
         name="cell_count",
-        description="Return the number of cells in the notebook (last cell index)",
+        description="Return the index of the last cell",
         args_schema=CellCountInput,
         return_direct=True,
     ),

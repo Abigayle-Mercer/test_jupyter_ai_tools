@@ -2,9 +2,6 @@ import json
 
 
 def delete_cell(file_path: str, cell_index: int) -> str:
-    """
-    Remove a cell at a given integer cell index.
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
@@ -25,10 +22,6 @@ def delete_cell(file_path: str, cell_index: int) -> str:
 
 
 def add_cell(file_path: str, cell_index: int, cell_type: str = "code") -> str:
-    """
-    Add an empty cell at a given integer cell index. The cell is a code cell by default,
-    but can be set to markdown with the string "markdown".
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
@@ -54,9 +47,6 @@ def add_cell(file_path: str, cell_index: int, cell_type: str = "code") -> str:
 
 
 def write_to_cell(file_path: str, cell_index: int, content: str) -> str:
-    """
-    Overwrite the content of an existing cell at a given cell index.
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
@@ -77,9 +67,6 @@ def write_to_cell(file_path: str, cell_index: int, content: str) -> str:
 
 
 def read_cell(file_path: str, cell_index: int) -> str:
-    """
-    Read the full content of a cell at a given integer cell index.
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
@@ -95,9 +82,6 @@ def read_cell(file_path: str, cell_index: int) -> str:
 
 
 def cell_count(file_path: str) -> str:
-    """
-    Return the total number of cells.
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
@@ -110,9 +94,6 @@ def cell_count(file_path: str) -> str:
 
 
 def read_notebook(file_path: str) -> str:
-    """
-    Retrieve all cells from a notebook.
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             notebook = json.load(f)
